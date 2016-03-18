@@ -1,6 +1,6 @@
 var app = angular.module('uneApp', []);
 
-app.controller("uneFonctionCtrl", function ($scope, $rootScope,WebSocketService) {
+app.controller("uneFonctionCtrl", function ($scope, $rootScope,$timeout, WebSocketService) {
 	
 //Mise en place du Socket
 	$rootScope.ws = new SocketManager.SocketManager($scope,$rootScope);
@@ -30,7 +30,15 @@ app.factory("Post", function(){
 	};
 	return factory;
 })
-
+/**
+ * Apparition d'éléments suite à  une "event"
+ */
+//MAJ des listes de catégorie
+	$scope.majCatego = function (list) {
+		$timeout(function () {
+			$scope.categories = list;
+		}, 100);
+	}
 var SocketManager = {
 	ws:{},
 	
