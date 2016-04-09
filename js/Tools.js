@@ -1,7 +1,12 @@
+var rxManager = {
+	ackManager : function (data){
+		alert("message recu par le serveur");
+	}
+}
 /**
   * Fonction d'orientation de message entrant
   */
-var rxTools = {
+var rxTools = {//@bm : bookMark switch de message de r�ception
 //Orientation du message reçu
 //    rxRouting : function (scope,rootScope,data/*,PartyStartService*/){
 	rxRouting : function (scope,rootScope,data){
@@ -12,9 +17,9 @@ var rxTools = {
                 alert(data.message);
                 break;
             
-            case "broadCastEndR":
+            case "ackLogin":
 //console.info("[Test:] Blason de fin de tour recu: ",data.blasonColor);
-				blasonManager.majAffichEndRound(scope, data);
+            	rxManager.ackManager(data);
             	break;
 				
             default:

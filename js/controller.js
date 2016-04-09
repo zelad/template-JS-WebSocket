@@ -11,7 +11,11 @@ app.controller("uneFonctionCtrl", function ($scope, $rootScope,$timeout, WebSock
 	
 	$scope.fireWStest = function(){
 //		$rootScope.ws.send("test");
-		WebSocketService.sendObject("recAttack","toto");
+		var unObjetJson = {
+				name:"kiki",
+				firstname:"zelad"
+		}
+		WebSocketService.sendObject("login",unObjetJson);
 	};
 
 });
@@ -31,36 +35,36 @@ app.factory("Post", function(){
 	return factory;
 })
 /**
- * Apparition d'éléments suite à  une "event"
+ * Apparition d'ï¿½lï¿½ments suite ï¿½ une "event"
  */
-//MAJ des listes de catégorie
-	$scope.majCatego = function (list) {
-		$timeout(function () {
-			$scope.categories = list;
-		}, 100);
-	}
+//MAJ des listes de catï¿½gorie
+//	$scope.majCatego = function (list) {
+//		$timeout(function () {
+//			$scope.categories = list;
+//		}, 100);
+//	}
 var SocketManager = {
 	ws:{},
 	
 	SocketManager: function (scope,rootScope){
-//        this.ws = new WebSocket("ws://localhost:9999/");
+        this.ws = new WebSocket("ws://localhost:9999/");
 //        this.ws = new WebSocket("ws://localhost:80/");
-        this.ws = new WebSocket("ws://172.28.50.187/");//ne fonctionne pas chez Ali le: 28/1/2016
+//        this.ws = new WebSocket("ws://172.28.50.187/");//ne fonctionne pas chez Ali le: 28/1/2016
         
         this.ws.onopen = function(){
         	console.log("Socket has been opened!");
         };
         
     	this.ws.onmessage = function(message) {
-console.log(message);
-//    	    var messageObj = JSON.parse(message.data);
+//console.log(message);
+    	    var messageObj = JSON.parse(message.data);
     	    
-//  console.log("Received data from websocket: ", messageObj);
-//    	    rxTools.rxRouting(scope,rootScope,messageObj);
+  console.log("Received data from websocket: ", messageObj);
+    	    rxTools.rxRouting(scope,rootScope,messageObj);
     	};
         
         return this.ws;
     }
 	
 };
-//TODO @ICI: vidéo n°7 à 0:02:00 pour commencer à tester "$http" et "$q"
+//TODO @ICI: vidï¿½o nï¿½7 ï¿½ 0:02:00 pour commencer ï¿½ tester "$http" et "$q"
