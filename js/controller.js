@@ -17,7 +17,17 @@ app.controller("uneFonctionCtrl", function ($scope, $rootScope,$timeout, WebSock
 		}
 		WebSocketService.sendObject("login",unObjetJson);
 	};
-
+/**
+ * Apparition d'éléments / Tx serveur,
+ * A lancer lorsque l'on souhaite MAJ une page sous AngularJS...
+ */
+	$scope.safeApply = function() {
+		var phase = this.$root.$$phase;
+		if(phase == '$apply' || phase == '$digest')
+		 this.$eval();
+		else
+		 this.$apply();
+	};
 });
 
 app.factory("Post", function(){
@@ -34,18 +44,6 @@ app.factory("Post", function(){
 	};
 	return factory;
 })
-/**
- * Apparition d'éléments / Tx serveur,
- * A lancer lorsque l'on souhaite MAJ une page sous AngularJS...
- */
-$scope.safeApply = function() {
-	var phase = this.$root.$$phase;
-	if(phase == '$apply' || phase == '$digest')
-	 this.$eval();
-	else
-	 this.$apply();
-};
-
 
 var SocketManager = {
 	ws:{},
@@ -71,4 +69,4 @@ var SocketManager = {
     }
 
 };
-//TODO @ICI: vid�o n�7 � 0:02:00 pour commencer � tester "$http" et "$q"
+//TODO @ICI: vidï¿½o nï¿½7 ï¿½ 0:02:00 pour commencer ï¿½ tester "$http" et "$q"
